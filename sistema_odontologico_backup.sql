@@ -210,8 +210,8 @@ CREATE TABLE `citas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `citas` VALUES
-(1,1,1,1,2,'2026-05-10','09:00:00','09:30:00','confirmada','Primera consulta del paciente',NOW(),NOW()),
-(2,1,1,2,2,'2026-05-10','10:00:00','10:45:00','pendiente',NULL,NOW(),NOW());
+(1,1,1,1,2,1,'2026-05-10','09:00:00','09:30:00','confirmada','Primera consulta del paciente',NOW(),NOW()),
+(2,1,1,2,2,NULL,'2026-05-10','10:00:00','10:45:00','pendiente',NULL,NOW(),NOW());
 
 -- --------------------------------------------------------
 -- 9. historia_clinica
