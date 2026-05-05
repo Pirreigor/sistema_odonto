@@ -8,7 +8,7 @@ const app = express();
 
 const authRoutes = require('./routes/auth.routes');
 const testRoutes = require('./routes/test.routes');
-const patientRoutes = require('./routes/patient.routes');
+const patientRoutes = require('./routes/paciente.routes');
 const sedeRoutes = require('./routes/sede.routes');
 const citaRoutes = require('./routes/cita.routes');
 const servicioRoutes = require('./routes/servicio.routes');

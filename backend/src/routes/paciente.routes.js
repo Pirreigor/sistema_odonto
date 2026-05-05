@@ -6,7 +6,7 @@ const {
     createPatient,
     updatePatient,
     deletePatient
-} = require('../controllers/patient.controller');
+} = require('../controllers/paciente.controller');
 
 router.get('/', verifyToken, getPatients);
 router.post('/', verifyToken, createPatient);
