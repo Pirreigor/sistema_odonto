@@ -23,6 +23,3 @@ build/
 # Sistema operativo
 .DS_Store
 Thumbs.db
-
-# Backups SQL (opcional — eliminarlo si quieres incluirlo)
-*.sql

@@ -23,7 +23,7 @@ const Patients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await api.get('/patients');
+      const response = await api.get('/pacientes');
       setPatients(response.data);
     } catch (err) {
       setError('No se pudieron cargar los pacientes');
@@ -80,9 +80,9 @@ const Patients = () => {
       setSaving(true);
 
       if (editingId) {
-        await api.put(`/patients/${editingId}`, form);
+        await api.put(`/pacientes/${editingId}`, form);
       } else {
-        await api.post('/patients', form);
+        await api.post('/pacientes', form);
       }
 
       setForm(initialForm);
@@ -106,7 +106,7 @@ const Patients = () => {
     if (!confirmDelete) return;
 
     try {
-      await api.delete(`/patients/${id}`);
+      await api.delete(`/pacientes/${id}`);
 
       if (editingId === id) {
         setForm(initialForm);

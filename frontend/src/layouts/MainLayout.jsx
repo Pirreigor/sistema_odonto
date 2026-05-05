@@ -20,6 +20,7 @@ const MainLayout = () => {
           <Link to="/dashboard" style={styles.link}>Dashboard</Link>
           <Link to="/patients" style={styles.link}>Pacientes</Link>
           <Link to="/appointments" style={styles.link}>Citas</Link>
+          <Link to="/sedes" style={styles.link}>Sedes</Link>
         </nav>
 
         <button onClick={handleLogout} style={styles.button}>

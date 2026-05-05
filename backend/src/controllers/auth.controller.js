@@ -21,6 +21,7 @@ const login = async (req, res) => {
         u.clave,
         u.estado,
         u.clinica_id,
+        u.sede_id,
         r.nombre AS rol,
         c.nombre AS clinica_nombre
       FROM usuarios u
@@ -56,6 +57,7 @@ const login = async (req, res) => {
       {
         id: user.id,
         clinica_id: user.clinica_id,
+        sede_id: user.sede_id,
         rol: user.rol
     },
     process.env.JWT_SECRET,
@@ -71,7 +73,8 @@ const login = async (req, res) => {
             apellido: user.apellido,
             email: user.email,
             rol: user.rol,
-            clinica_id: user.clinica_id
+            clinica_id: user.clinica_id,
+            sede_id: user.sede_id
         },
         clinica: {
         id: user.clinica_id,
