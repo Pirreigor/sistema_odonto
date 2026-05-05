@@ -6,9 +6,9 @@ const Dashboard = () => {
   return (
     <div style={{ padding: '30px' }}>
       <h1>Dashboard</h1>
-      <p><strong>Usuario:</strong> {auth.user?.name} {auth.user?.lastname}</p>
-      <p><strong>Rol:</strong> {auth.user?.role}</p>
-      <p><strong>Clínica:</strong> {auth.clinic?.name}</p>
+      <p><strong>Usuario:</strong> {auth.user?.nombre} {auth.user?.apellido}</p>
+      <p><strong>Rol:</strong> {auth.user?.rol}</p>
+      <p><strong>Clínica:</strong> {auth.clinica?.nombre}</p>
 
       <button onClick={logout} style={{ marginTop: '20px', padding: '10px 16px' }}>
         Cerrar sesión

@@ -15,17 +15,17 @@ const login = async (req, res) => {
     const [rows] = await pool.query(
       `SELECT 
         u.id,
-        u.name,
-        u.lastname,
+        u.nombre,
+        u.apellido,
         u.email,
-        u.password,
-        u.status,
-        u.clinic_id,
-        r.name AS role,
-        c.name AS clinic_name
-      FROM users u
-      INNER JOIN roles r ON u.role_id = r.id
-      INNER JOIN clinics c ON u.clinic_id = c.id
+        u.clave,
+        u.estado,
+        u.clinica_id,
+        r.nombre AS rol,
+        c.nombre AS clinica_nombre
+      FROM usuarios u
+      INNER JOIN roles r ON u.rol_id = r.id
+      INNER JOIN clinicas c ON u.clinica_id = c.id
       WHERE u.email = ?`,
       [email]
     );
@@ -38,13 +38,13 @@ const login = async (req, res) => {
 
     const user = rows[0];
 
-    if (user.status !== 1) {
+    if (user.estado !== 1) {
       return res.status(403).json({
         message: 'Usuario inactivo'
       });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.clave);
 
     if (!isMatch) {
       return res.status(401).json({
@@ -55,8 +55,8 @@ const login = async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
-        clinic_id: user.clinic_id,
-        role: user.role
+        clinica_id: user.clinica_id,
+        rol: user.rol
     },
     process.env.JWT_SECRET,
     { expiresIn: '8h' }
@@ -67,15 +67,15 @@ const login = async (req, res) => {
     token,
         user: {
             id: user.id,
-            name: user.name,
-            lastname: user.lastname,
+            nombre: user.nombre,
+            apellido: user.apellido,
             email: user.email,
-            role: user.role,
-            clinic_id: user.clinic_id
+            rol: user.rol,
+            clinica_id: user.clinica_id
         },
-        clinic: {
-        id: user.clinic_id,
-        name: user.clinic_name
+        clinica: {
+        id: user.clinica_id,
+        nombre: user.clinica_nombre
         }
     });
     } catch (error) {

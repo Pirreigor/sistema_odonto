@@ -2,14 +2,14 @@ const pool = require('../config/db');
 
 const getPatients = async (req, res) => {
   try {
-    const clinicId = req.user.clinic_id;
+    const clinicaId = req.user.clinica_id;
 
     const [rows] = await pool.query(
-      `SELECT id, dni, name, lastname, birth_date, gender, phone, email, address, medical_notes, status, created_at
-      FROM patients
-      WHERE clinic_id = ?
+      `SELECT id, dni, nombre, apellido, fecha_nacimiento, genero, telefono, email, direccion, notas_medicas, estado, created_at
+      FROM pacientes
+      WHERE clinica_id = ?
       ORDER BY id DESC`,
-      [clinicId]
+      [clinicaId]
     );
 
     return res.status(200).json(rows);
@@ -23,47 +23,47 @@ const getPatients = async (req, res) => {
 
 const createPatient = async (req, res) => {
   try {
-    const clinicId = req.user.clinic_id;
+    const clinicaId = req.user.clinica_id;
 
     const {
       dni,
-      name,
-      lastname,
-      birth_date,
-      gender,
-      phone,
+      nombre,
+      apellido,
+      fecha_nacimiento,
+      genero,
+      telefono,
       email,
-      address,
-      medical_notes
+      direccion,
+      notas_medicas
     } = req.body;
 
-    if (!name) {
+    if (!nombre) {
       return res.status(400).json({
         message: 'El nombre del paciente es obligatorio'
       });
     }
 
     const [result] = await pool.query(
-      `INSERT INTO patients 
-      (clinic_id, dni, name, lastname, birth_date, gender, phone, email, address, medical_notes)
+      `INSERT INTO pacientes 
+      (clinica_id, dni, nombre, apellido, fecha_nacimiento, genero, telefono, email, direccion, notas_medicas)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        clinicId,
+        clinicaId,
         dni || null,
-        name,
-        lastname || null,
-        birth_date || null,
-        gender || null,
-        phone || null,
+        nombre,
+        apellido || null,
+        fecha_nacimiento || null,
+        genero || null,
+        telefono || null,
         email || null,
-        address || null,
-        medical_notes || null
+        direccion || null,
+        notas_medicas || null
       ]
     );
 
     return res.status(201).json({
       message: 'Paciente registrado correctamente',
-      patientId: result.insertId
+      pacienteId: result.insertId
     });
   } catch (error) {
     console.error('Error al crear paciente:', error);
@@ -75,43 +75,43 @@ const createPatient = async (req, res) => {
 
 const updatePatient = async (req, res) => {
   try {
-    const clinicId = req.user.clinic_id;
+    const clinicaId = req.user.clinica_id;
     const { id } = req.params;
 
     const {
       dni,
-      name,
-      lastname,
-      birth_date,
-      gender,
-      phone,
+      nombre,
+      apellido,
+      fecha_nacimiento,
+      genero,
+      telefono,
       email,
-      address,
-      medical_notes
+      direccion,
+      notas_medicas
     } = req.body;
 
-    if (!name) {
+    if (!nombre) {
       return res.status(400).json({
         message: 'El nombre del paciente es obligatorio'
       });
     }
 
     const [result] = await pool.query(
-      `UPDATE patients
-      SET dni = ?, name = ?, lastname = ?, birth_date = ?, gender = ?, phone = ?, email = ?, address = ?, medical_notes = ?
-      WHERE id = ? AND clinic_id = ?`,
+      `UPDATE pacientes
+      SET dni = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, genero = ?, telefono = ?, email = ?, direccion = ?, notas_medicas = ?
+      WHERE id = ? AND clinica_id = ?`,
       [
         dni || null,
-        name,
-        lastname || null,
-        birth_date || null,
-        gender || null,
-        phone || null,
+        nombre,
+        apellido || null,
+        fecha_nacimiento || null,
+        genero || null,
+        telefono || null,
         email || null,
-        address || null,
-        medical_notes || null,
+        direccion || null,
+        notas_medicas || null,
         id,
-        clinicId
+        clinicaId
       ]
     );
 
@@ -134,13 +134,13 @@ const updatePatient = async (req, res) => {
 
 const deletePatient = async (req, res) => {
   try {
-    const clinicId = req.user.clinic_id;
+    const clinicaId = req.user.clinica_id;
     const { id } = req.params;
 
     const [result] = await pool.query(
-      `DELETE FROM patients
-      WHERE id = ? AND clinic_id = ?`,
-      [id, clinicId]
+      `DELETE FROM pacientes
+      WHERE id = ? AND clinica_id = ?`,
+      [id, clinicaId]
     );
 
     if (result.affectedRows === 0) {

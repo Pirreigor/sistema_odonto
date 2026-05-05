@@ -3,14 +3,14 @@ import api from '../api/axios';
 
 const initialForm = {
   dni: '',
-  name: '',
-  lastname: '',
-  birth_date: '',
-  gender: '',
-  phone: '',
+  nombre: '',
+  apellido: '',
+  fecha_nacimiento: '',
+  genero: '',
+  telefono: '',
   email: '',
-  address: '',
-  medical_notes: '',
+  direccion: '',
+  notas_medicas: '',
 };
 
 const Patients = () => {
@@ -47,14 +47,14 @@ const Patients = () => {
   const handleEdit = (patient) => {
     setForm({
       dni: patient.dni || '',
-      name: patient.name || '',
-      lastname: patient.lastname || '',
-      birth_date: patient.birth_date ? patient.birth_date.split('T')[0] : '',
-      gender: patient.gender || '',
-      phone: patient.phone || '',
+      nombre: patient.nombre || '',
+      apellido: patient.apellido || '',
+      fecha_nacimiento: patient.fecha_nacimiento ? patient.fecha_nacimiento.split('T')[0] : '',
+      genero: patient.genero || '',
+      telefono: patient.telefono || '',
       email: patient.email || '',
-      address: patient.address || '',
-      medical_notes: patient.medical_notes || '',
+      direccion: patient.direccion || '',
+      notas_medicas: patient.notas_medicas || '',
     });
 
     setEditingId(patient.id);
@@ -71,7 +71,7 @@ const Patients = () => {
     e.preventDefault();
     setError('');
 
-    if (!form.name.trim()) {
+    if (!form.nombre.trim()) {
       setError('El nombre del paciente es obligatorio');
       return;
     }
@@ -136,44 +136,44 @@ const Patients = () => {
 
         <input
           type="text"
-          name="name"
+          name="nombre"
           placeholder="Nombres"
-          value={form.name}
+          value={form.nombre}
           onChange={handleChange}
           style={styles.input}
         />
 
         <input
           type="text"
-          name="lastname"
+          name="apellido"
           placeholder="Apellidos"
-          value={form.lastname}
+          value={form.apellido}
           onChange={handleChange}
           style={styles.input}
         />
 
         <input
           type="date"
-          name="birth_date"
-          value={form.birth_date}
+          name="fecha_nacimiento"
+          value={form.fecha_nacimiento}
           onChange={handleChange}
           style={styles.input}
         />
 
         <input
           type="text"
-          name="gender"
+          name="genero"
           placeholder="Género"
-          value={form.gender}
+          value={form.genero}
           onChange={handleChange}
           style={styles.input}
         />
 
         <input
           type="text"
-          name="phone"
+          name="telefono"
           placeholder="Teléfono"
-          value={form.phone}
+          value={form.telefono}
           onChange={handleChange}
           style={styles.input}
         />
@@ -189,15 +189,15 @@ const Patients = () => {
 
         <input
           type="text"
-          name="address"
+          name="direccion"
           placeholder="Dirección"
-          value={form.address}
+          value={form.direccion}
           onChange={handleChange}
           style={styles.input}
         />
 
         <textarea
-          name="medical_notes"
+          name="notas_medicas"
           placeholder="Observaciones médicas"
           value={form.medical_notes}
           onChange={handleChange}
@@ -251,9 +251,9 @@ const Patients = () => {
               <tr key={patient.id}>
                 <td style={styles.td}>{index + 1}</td>
                 <td style={styles.td}>{patient.dni}</td>
-                <td style={styles.td}>{patient.name}</td>
-                <td style={styles.td}>{patient.lastname}</td>
-                <td style={styles.td}>{patient.phone}</td>
+                <td style={styles.td}>{patient.nombre}</td>
+                <td style={styles.td}>{patient.apellido}</td>
+                <td style={styles.td}>{patient.telefono}</td>
                 <td style={styles.td}>{patient.email}</td>
                 <td style={styles.td}>
                   <div style={styles.actions}>

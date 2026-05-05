@@ -14,7 +14,7 @@ const MainLayout = () => {
     <div style={styles.container}>
       <aside style={styles.sidebar}>
         <h2>Sistema Dental</h2>
-        <p style={styles.clinicName}>{auth.clinic?.name}</p>
+        <p style={styles.clinicName}>{auth.clinica?.nombre}</p>
 
         <nav style={styles.nav}>
           <Link to="/dashboard" style={styles.link}>Dashboard</Link>
